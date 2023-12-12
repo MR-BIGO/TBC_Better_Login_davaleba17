@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TBC_Better_Login_davaleba17</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="register">Register</string>
+</resources>
