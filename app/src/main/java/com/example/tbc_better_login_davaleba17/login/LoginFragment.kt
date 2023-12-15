@@ -1,6 +1,5 @@
 package com.example.tbc_better_login_davaleba17.login
 
-import android.content.SharedPreferences
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.setFragmentResultListener
@@ -12,7 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.tbc_better_login_davaleba17.BaseFragment
 import com.example.tbc_better_login_davaleba17.common.Resource
 import com.example.tbc_better_login_davaleba17.databinding.FragmentLoginBinding
+import com.example.tbc_better_login_davaleba17.datastore.PreferencesDataStore
 import com.example.tbc_better_login_davaleba17.models.UserRequest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 
@@ -20,10 +21,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private val viewModel: LoginFragmentViewModel by viewModels()
     //not being used yet.
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
 
     override fun setUp() {
+        checkCurrentUser()
         listeners()
         bindObservers()
         resultListener()
@@ -51,7 +51,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                         UserRequest(
                             editTxtEmail.text.toString(),
                             editTxtPassword.text.toString()
-                        )
+                        ), checkRemember.isChecked
                     )
                 }
             }
@@ -78,6 +78,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         field.error = error
     }
 
+    private fun checkCurrentUser(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            if (PreferencesDataStore.getToken().first().isNotEmpty()){
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+            }
+        }
+    }
+
     private fun bindObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -90,7 +98,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                                 Toast.LENGTH_SHORT
                             ).show()
                             //A quick fix that probably shouldn't remain like this
-                            val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment(binding.editTxtEmail.text.toString())
+                            val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                             findNavController().navigate(action)
                         }
 
