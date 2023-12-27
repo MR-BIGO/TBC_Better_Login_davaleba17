@@ -28,5 +28,4 @@ class LoginRepositoryImpl @Inject constructor(val logInService: ILoginService) :
             emit(Resource.Loading(false))
         }
     }
-
 }

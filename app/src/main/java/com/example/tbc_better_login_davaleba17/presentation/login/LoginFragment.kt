@@ -1,5 +1,6 @@
 package com.example.tbc_better_login_davaleba17.presentation.login
 
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.setFragmentResultListener
@@ -75,8 +76,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         field.error = error
     }
 
-    private fun navigateToHome() {
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+    private fun navigateToHome(email: String) {
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment(email))
     }
 
     private fun navigateToRegister() {
@@ -94,7 +95,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                                 "Successfully logged in ${it.data.token}",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            navigateToHome()
+                            //very bad implementation, I know. will fix these days.
+                            navigateToHome(binding.editTxtEmail.text.toString())
                         }
 
                         is Resource.Error -> {
@@ -102,7 +104,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                                 .show()
                         }
 
-                        is Resource.Loading -> {}
+                        is Resource.Loading -> {
+                            binding.progressBar.visibility = if(it.loading) View.VISIBLE else View.INVISIBLE
+                        }
                         else -> {}
                     }
                 }

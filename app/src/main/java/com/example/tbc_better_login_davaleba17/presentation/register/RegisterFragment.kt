@@ -1,5 +1,6 @@
 package com.example.tbc_better_login_davaleba17.presentation.register
 
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.os.bundleOf
@@ -89,7 +90,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                                 "Successfully registered ${it.data.token}",
                                 Toast.LENGTH_SHORT
                             ).show()
-
                             setFragmentResult(
                                 "RegisterResult",
                                 bundleOf(
@@ -105,7 +105,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                                 .show()
                         }
 
-                        is Resource.Loading -> {}
+                        is Resource.Loading -> {
+                            binding.progressBar.visibility = if(it.loading) View.VISIBLE else View.INVISIBLE
+                        }
                         else -> {}
                     }
                 }
