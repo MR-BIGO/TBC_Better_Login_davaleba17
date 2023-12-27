@@ -1,4 +1,4 @@
-package com.example.tbc_better_login_davaleba17.login
+package com.example.tbc_better_login_davaleba17.presentation.login
 
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
@@ -8,22 +8,20 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.tbc_better_login_davaleba17.BaseFragment
-import com.example.tbc_better_login_davaleba17.common.Resource
+import com.example.tbc_better_login_davaleba17.data.common.Resource
+import com.example.tbc_better_login_davaleba17.data.common.UserRequest
 import com.example.tbc_better_login_davaleba17.databinding.FragmentLoginBinding
-import com.example.tbc_better_login_davaleba17.datastore.PreferencesDataStore
-import com.example.tbc_better_login_davaleba17.models.UserRequest
-import kotlinx.coroutines.flow.first
+import com.example.tbc_better_login_davaleba17.presentation.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     private val viewModel: LoginFragmentViewModel by viewModels()
-    //not being used yet.
 
     override fun setUp() {
-        checkCurrentUser()
         listeners()
         bindObservers()
         resultListener()
@@ -41,8 +39,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun listeners() {
         with(binding) {
             btnRegister.setOnClickListener {
-                val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
-                findNavController().navigate(action)
+                navigateToRegister()
             }
 
             btnLogin.setOnClickListener {
@@ -78,12 +75,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         field.error = error
     }
 
-    private fun checkCurrentUser(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            if (PreferencesDataStore.getToken().first().isNotEmpty()){
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
-            }
-        }
+    private fun navigateToHome() {
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+    }
+
+    private fun navigateToRegister() {
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
     }
 
     private fun bindObservers() {
@@ -97,9 +94,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                                 "Successfully logged in ${it.data.token}",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            //A quick fix that probably shouldn't remain like this
-                            val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                            findNavController().navigate(action)
+                            navigateToHome()
                         }
 
                         is Resource.Error -> {

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.tbc_better_login_davaleba17.login.LoginFragment"
+        android:name="com.example.tbc_better_login_davaleba17.presentation.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.tbc_better_login_davaleba17.register.RegisterFragment"
+        android:name="com.example.tbc_better_login_davaleba17.presentation.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -30,13 +30,13 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.tbc_better_login_davaleba17.home.HomeFragment"
+        android:name="com.example.tbc_better_login_davaleba17.presentation.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

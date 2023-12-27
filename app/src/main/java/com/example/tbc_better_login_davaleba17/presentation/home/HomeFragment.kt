@@ -1,13 +1,13 @@
-package com.example.tbc_better_login_davaleba17.home
+package com.example.tbc_better_login_davaleba17.presentation.home
 
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.tbc_better_login_davaleba17.BaseFragment
 import com.example.tbc_better_login_davaleba17.databinding.FragmentHomeBinding
-import com.example.tbc_better_login_davaleba17.datastore.PreferencesDataStore
-import kotlinx.coroutines.flow.first
+import com.example.tbc_better_login_davaleba17.presentation.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     override fun setUp() {
@@ -19,7 +19,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.btnLogOut.setOnClickListener {
 
             viewLifecycleOwner.lifecycleScope.launch {
-                PreferencesDataStore.clearSession()
+              //  PreferencesDataStore.clearSession()
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
             }
         }
@@ -27,7 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun showEmail(){
         viewLifecycleOwner.lifecycleScope.launch {
-            binding.tvEmail.text =  PreferencesDataStore.getEmail().first()
+           // binding.tvEmail.text =  PreferencesDataStore.getEmail().first()
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.tbc_better_login_davaleba17.register
+package com.example.tbc_better_login_davaleba17.presentation.register
 
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
@@ -9,13 +9,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.tbc_better_login_davaleba17.BaseFragment
-import com.example.tbc_better_login_davaleba17.common.Resource
+import com.example.tbc_better_login_davaleba17.presentation.BaseFragment
+import com.example.tbc_better_login_davaleba17.data.common.Resource
 import com.example.tbc_better_login_davaleba17.databinding.FragmentRegisterBinding
-import com.example.tbc_better_login_davaleba17.models.UserRequest
+import com.example.tbc_better_login_davaleba17.data.common.UserRequest
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
     private val viewModel: RegisterFragmentViewModel by viewModels()
@@ -72,6 +74,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         field.error = error
     }
 
+    private fun navigateToLogin(){
+        findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
+    }
+
     private fun bindObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -91,8 +97,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                                     "password" to binding.editTxtPassword.text.toString()
                                 )
                             )
-                            val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
-                            findNavController().navigate(action)
+                            navigateToLogin()
                         }
 
                         is Resource.Error -> {

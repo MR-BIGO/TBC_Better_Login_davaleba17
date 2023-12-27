@@ -1,4 +1,4 @@
-package com.example.tbc_better_login_davaleba17.utils
+package com.example.tbc_better_login_davaleba17.data.common
 
 class Constants {
 

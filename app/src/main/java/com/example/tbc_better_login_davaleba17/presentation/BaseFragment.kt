@@ -1,4 +1,4 @@
-package com.example.tbc_better_login_davaleba17
+package com.example.tbc_better_login_davaleba17.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater

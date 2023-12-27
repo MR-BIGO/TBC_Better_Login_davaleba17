@@ -1,4 +1,4 @@
-package com.example.tbc_better_login_davaleba17.common
+package com.example.tbc_better_login_davaleba17.data.common
 
 sealed class Resource<T> {
     data class Success<T>(val data: T) : Resource<T>()
