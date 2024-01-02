@@ -1,11 +1,11 @@
 package com.example.tbc_better_login_davaleba17.di
 
-import com.example.tbc_better_login_davaleba17.data.login.ILoginService
-import com.example.tbc_better_login_davaleba17.data.login.LoginRepositoryImpl
-import com.example.tbc_better_login_davaleba17.data.register.IRegisterService
-import com.example.tbc_better_login_davaleba17.data.register.RegisterRepositoryImpl
-import com.example.tbc_better_login_davaleba17.domain.login.ILogInRepository
-import com.example.tbc_better_login_davaleba17.domain.register.IRegisterRepository
+import com.example.tbc_better_login_davaleba17.data.service.ILoginService
+import com.example.tbc_better_login_davaleba17.data.repository.LoginRepositoryImpl
+import com.example.tbc_better_login_davaleba17.data.service.IRegisterService
+import com.example.tbc_better_login_davaleba17.data.repository.RegisterRepositoryImpl
+import com.example.tbc_better_login_davaleba17.domain.repository.ILogInRepository
+import com.example.tbc_better_login_davaleba17.domain.repository.IRegisterRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

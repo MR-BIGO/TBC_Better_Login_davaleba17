@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tbc_better_login_davaleba17.data.common.Resource
 import com.example.tbc_better_login_davaleba17.data.common.UserRequest
-import com.example.tbc_better_login_davaleba17.domain.register.IRegisterRepository
-import com.example.tbc_better_login_davaleba17.domain.register.RegisterResponse
+import com.example.tbc_better_login_davaleba17.domain.repository.IRegisterRepository
+import com.example.tbc_better_login_davaleba17.domain.model.RegisterResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterFragmentViewModel @Inject constructor(val registerRepository: IRegisterRepository): ViewModel(){
+class RegisterFragmentViewModel @Inject constructor(private val registerRepository: IRegisterRepository): ViewModel(){
 
     private val _itemFlow = MutableStateFlow<Resource<RegisterResponse>?>(null)
     val itemFlow: StateFlow<Resource<RegisterResponse>?> = _itemFlow.asStateFlow()

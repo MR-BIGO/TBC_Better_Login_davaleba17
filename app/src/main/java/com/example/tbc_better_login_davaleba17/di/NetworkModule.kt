@@ -1,8 +1,8 @@
 package com.example.tbc_better_login_davaleba17.di
 
 import com.example.tbc_better_login_davaleba17.data.common.Constants.Companion.BASE_URL
-import com.example.tbc_better_login_davaleba17.data.login.ILoginService
-import com.example.tbc_better_login_davaleba17.data.register.IRegisterService
+import com.example.tbc_better_login_davaleba17.data.service.ILoginService
+import com.example.tbc_better_login_davaleba17.data.service.IRegisterService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
